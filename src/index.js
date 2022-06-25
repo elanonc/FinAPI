@@ -6,6 +6,21 @@ app.use(express.json());
 
 const customers = [];
 
+// Middleware para validação do usuário
+function verifyIfExistsAccountCPF(request, response, next) {
+    const { cpf } = request.headers;
+
+    const customer = customers.find(customer => customer.cpf === cpf);
+
+    if (!customer) {
+        return response.status(400).json( {error: "Customer not found" });
+    }
+
+    request.customer = customer; // Repassando o objeto para o request.costumer, a informação consumida pode ser lida em outra parte posteriormente
+
+    return next();
+}
+
 app.post("/account", (request, response) => {
     const { cpf, name } = request.body;
 
@@ -24,14 +39,8 @@ app.post("/account", (request, response) => {
     return response.status(201).send();
 })
 
-app.get("/statement/:cpf", (request, response) => {
-    const { cpf } = request.params; 
-
-    const customer = customers.find(customer => customer.cpf === cpf);
-    
-    if (!customer) {
-        return response.status(400).json( {error: "Customer not found" });
-    }
+app.get("/statement/", verifyIfExistsAccountCPF, (request, response) => {
+    const { customer } = request; // Desestrutura o objeto do request
 
     return response.json(customer.statement);
 })

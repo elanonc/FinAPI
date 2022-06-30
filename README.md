@@ -22,3 +22,15 @@
  - [x] Não deve ser possível excluir uma conta não existente  
  - [x] Não deve ser possível fazer um saque quando o saldo for insuficiente
  - [x] Não deve ser possível retornar o balanço de uma conta não existente
+
+# Clone este repositório
+$ git clone https://github.com/elanonc/FinAPI
+
+# Entre na pasta
+$ cd finapi
+
+# Instale as dependências
+$ npm install
+
+# Para executar
+$ npm run dev

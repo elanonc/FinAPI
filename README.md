@@ -23,6 +23,8 @@
  - [x] Não deve ser possível fazer um saque quando o saldo for insuficiente
  - [x] Não deve ser possível retornar o balanço de uma conta não existente
 
+## Para executar
+```bash
 # Clone este repositório
 $ git clone https://github.com/elanonc/FinAPI
 
@@ -34,3 +36,4 @@ $ npm install
 
 # Para executar
 $ npm run dev
+```
